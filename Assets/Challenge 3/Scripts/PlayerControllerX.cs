@@ -22,8 +22,7 @@ public class PlayerControllerX : MonoBehaviour
     void Start()
     {
         Physics.gravity *= gravityModifier;
-        playerAudio = GetComponent<AudioSource>();
-
+        playerRb = GetComponent<Rigidbody>();
         // Apply a small upward force at the start of the game
         playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
 
@@ -37,6 +36,7 @@ public class PlayerControllerX : MonoBehaviour
         {
             playerRb.AddForce(Vector3.up * floatForce);
         }
+        //Debug.Log("test");
     }
 
     private void OnCollisionEnter(Collision other)
@@ -52,7 +52,7 @@ public class PlayerControllerX : MonoBehaviour
         } 
 
         // if player collides with money, fireworks
-        else if (other.gameObject.CompareTag("Money"))
+        else if (other.gameObject.CompareTag("Bomb"))
         {
             fireworksParticle.Play();
             playerAudio.PlayOneShot(moneySound, 1.0f);
